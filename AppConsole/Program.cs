@@ -10,8 +10,8 @@ namespace AppConsole
      *      2.1 Si porte = Un garde l'arrete Game Over
      *      2.2 Si fenetre alors le jeu continue
      *  3. Le joueur est dans le couloir du chateau. Il peut ouvrir la porte de droite ou bien de gauche.
-     *      3.1 Si porte gauche = Il tombe sur des des gardes Game Over.
-     *      3.2 Si droite = Il trouve la princesse WINNE
+     *      3.1 Si porte droite = Il tombe sur des des gardes Game Over.
+     *      3.2 Si gauche = Il trouve la princesse WINNE
      *
      *  Suite :
      *      - Ajouter un inventaire, clef, objet.
@@ -23,53 +23,88 @@ namespace AppConsole
     {
         private static void Main(string[] args)
         {
+            const string perdu = "Vous avez perdu";
             //string dir;
             Console.WriteLine(Introduction());
 
             if (Chapitre_1() == false)
             {
-                Quitter("Vous etes tombé dans une failaise\nVous avez perdu");
+                Quitter($"Vous etes tombé dans une failaise.\n{perdu}");
             }
 
-            Quitter("La partie est terminé");
+            if (Chapitre_2() == false)
+            {
+                Quitter($"Un garde vous a vue.\n{perdu}");
+            }
+
+            if (Chapitre_3() == false)
+            {
+                Quitter($"La porte que vous avez ouvert vous à menez tout droit dans la salle de repos des gardes et malheuresement pour vous des gardes étais en train de jouer au carte.\n{perdu}");
+            }
+
+            Quitter("Vous avez trouver la princesse, vous avez gagner !!!");
 
         }
 
         private static bool Chapitre_1()
         {
-            string direction = "";
             string[] choix = {"ouest", "est"};
 
-            Console.WriteLine("Vous etes dans une foret et vous avez deux chemin devant vous");
+            Console.WriteLine("\nVous etes dans une foret et vous avez deux chemin devant vous");
             Console.WriteLine("Vous pouvez prendre le chemin en direction de l'ouest ou bien en direction de l'est");
             Console.WriteLine("Quelle chemin allez vous choisir ?");
-            
-            while (choix.Contains(direction) == false)
-            {
-                direction = Console.ReadLine();
-                if (choix.Contains(direction) == false)
-                {
-                    Console.WriteLine("Mauvaise rentrer de texte veuiller écrire sois \"ouest\", \"est\"");
-                }
-            }
-            
-            if (direction == "est")
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+
+            return Solution_possible(choix, "est");
         }
-        
+
         private static bool Chapitre_2()
         {
-            return true;
+            string[] choix = {"porte", "fenetre"};
+
+            Console.WriteLine("\nVous arrivez devant le chateau mais comment allez vous rentrer ?");
+            Console.WriteLine("Vous pouvez renter par la porte ou bien la fenetre");
+            Console.WriteLine("Quelle chemin allez vous choisir ?");
+
+            return Solution_possible(choix, "fenetre");
         }
         
         private static bool Chapitre_3()
         {
+            string[] choix = {"gauche", "droite"};
+
+            Console.WriteLine("\nVous arrivez dans un couloirs mais il y a deux portes ?");
+            Console.WriteLine("Vous pouvez ouvrir une seule porte, celle de gauche ou celle de droite.");
+            Console.WriteLine("Quelle porte allez vous choisir ?");
+
+            return Solution_possible(choix, "gauche");
+
+        }
+
+        private static bool Solution_possible(string[] choix, string reponse)
+        {
+            string tentative = "";
+            string possible = String.Join(", ", choix);
+            while (choix.Contains(tentative) == false)
+            {
+                tentative = Console.ReadLine().ToLower();
+                if (choix.Contains(tentative) == false)
+                {
+                    Console.WriteLine($"Mauvaise rentrer de texte veuillez écrire:\n{possible}");
+                }
+            }
+
+            if (tentative == reponse)
+            {
+                return true;
+            }
+
+            return false;
+        } 
+        
+        private static bool Gagner()
+        {
+            const string message = "Vous avez récuperer la princesse";
+            Console.WriteLine(message);
             return true;
         }
 
