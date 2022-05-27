@@ -23,7 +23,7 @@ namespace AppConsole
     {
         static void Main(String[] args)
         {
-            string dir;
+            //string dir;
             Console.WriteLine(Introduction());
             
             Quitter();
@@ -32,10 +32,29 @@ namespace AppConsole
 
         private static string Introduction()
         {
-            string presentation = "Bienvenue dans ce jeux \"AppConsole\".\n";
-            string objectif = "L'objectif de ce jeux est de sauver la princesse sans mourir et sans ce faire voir";
             
-            return $"{presentation}\n{objectif}";
+            const string presentation = "Bienvenue dans ce jeux \"AppConsole\".\n";
+            const string objectif = "L'objectif de ce jeux est de sauver la princesse sans mourir et sans ce faire voir";
+            
+            return $"{Titre()}\n{presentation}\n{objectif}";
+        }
+
+        private static string Titre()
+        {
+
+            const string text = @"
+                        _____                      _      
+     /\                / ____|                    | |     
+    /  \   _ __  _ __ | |     ___  _ __  ___  ___ | | ___ 
+   / /\ \ | '_ \| '_ \| |    / _ \| '_ \/ __|/ _ \| |/ _ \
+  / ____ \| |_) | |_) | |___| (_) | | | \__ \ (_) | |  __/
+ /_/    \_\ .__/| .__/ \_____\___/|_| |_|___/\___/|_|\___|
+          | |   | |                                       
+          |_|   |_|                                       
+";
+
+            return text;
+
         }
 
         private static void Quitter(string message="Appuyer sur un touche pour quitter")
