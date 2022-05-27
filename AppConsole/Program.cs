@@ -1,10 +1,10 @@
-﻿using System;
+﻿//using System;
 
 namespace AppConsole
 {
     /*
      *  1. Le joueur est dans une foret. Il peut aller à l'est ou à l'ouest.
-     *      1.1 Si le choix est est zlors il tombe et à perdu
+     *      1.1 Si le choix est est alors il tombe et à perdu
      *      1.2 Si ouest alors le jeux continue
      *  2. Le joueur est devant le chateau. Il peut entrer par la porte ou par la fenetre.
      *      2.1 Si porte = Un garde l'arrete Game Over
@@ -21,13 +21,56 @@ namespace AppConsole
 
     class Game
     {
-        static void Main(String[] args)
+        private static void Main(string[] args)
         {
             //string dir;
             Console.WriteLine(Introduction());
-            
-            Quitter();
 
+            if (Chapitre_1() == false)
+            {
+                Quitter("Vous etes tombé dans une failaise\nVous avez perdu");
+            }
+
+            Quitter("La partie est terminé");
+
+        }
+
+        private static bool Chapitre_1()
+        {
+            string direction = "";
+            string[] choix = {"ouest", "est"};
+
+            Console.WriteLine("Vous etes dans une foret et vous avez deux chemin devant vous");
+            Console.WriteLine("Vous pouvez prendre le chemin en direction de l'ouest ou bien en direction de l'est");
+            Console.WriteLine("Quelle chemin allez vous choisir ?");
+            
+            while (choix.Contains(direction) == false)
+            {
+                direction = Console.ReadLine();
+                if (choix.Contains(direction) == false)
+                {
+                    Console.WriteLine("Mauvaise rentrer de texte veuiller écrire sois \"ouest\", \"est\"");
+                }
+            }
+            
+            if (direction == "est")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
+        private static bool Chapitre_2()
+        {
+            return true;
+        }
+        
+        private static bool Chapitre_3()
+        {
+            return true;
         }
 
         private static string Introduction()
@@ -36,11 +79,12 @@ namespace AppConsole
             const string presentation = "Bienvenue dans ce jeux \"AppConsole\".\n";
             const string objectif = "L'objectif de ce jeux est de sauver la princesse sans mourir et sans ce faire voir";
             
-            return $"{Titre()}\n{presentation}\n{objectif}";
+            return $"{Titre()}\n{presentation}\n{objectif}\n";
         }
 
         private static string Titre()
         {
+            // https://patorjk.com/software/taag/#p=testall&f=Blocks&t=AppConsole
 
             const string text = @"
                         _____                      _      
@@ -57,13 +101,12 @@ namespace AppConsole
 
         }
 
-        private static void Quitter(string message="Appuyer sur un touche pour quitter")
+        private static void Quitter(string message="")
         {
-            Console.WriteLine($"\n{message}");
+            Console.WriteLine($"\n{message}\n\nAppuyer sur \"Enter\" pour quitter");
             Console.ReadLine();
             Environment.Exit(0);
         }
 
     }
-
 }
