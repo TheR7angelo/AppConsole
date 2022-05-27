@@ -18,12 +18,33 @@ namespace AppConsole
      *      - Plus de route.
      *      - Système de score, vie, magie.
      */
-    
-    
-    
-    static void Main(String[] args)
+
+    class Game
     {
-        Console.WriteLine("test");
+        static void Main(String[] args)
+        {
+            string dir;
+            Console.WriteLine(Introduction());
+            
+            Quitter();
+
+        }
+
+        private static string Introduction()
+        {
+            string presentation = "Bienvenue dans ce jeux \"AppConsole\".\n";
+            string objectif = "L'objectif de ce jeux est de sauver la princesse sans mourir et sans ce faire voir";
+            
+            return $"{presentation}\n{objectif}";
+        }
+
+        private static void Quitter(string message="Appuyer sur un touche pour quitter")
+        {
+            Console.WriteLine($"\n{message}");
+            Console.ReadLine();
+            Environment.Exit(0);
+        }
+
     }
-    
+
 }
