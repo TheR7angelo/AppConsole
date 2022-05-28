@@ -7,6 +7,9 @@
         <Nullable>enable</Nullable>
         <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
         <ApplicationIcon>inari.ico</ApplicationIcon>
+        <Authors>ZP6177</Authors>
+        <Description>Je suis un test</Description>
+        <PackageIcon>inari.ico</PackageIcon>
     </PropertyGroup>
 
 </Project>
